@@ -1,23 +1,23 @@
 <config>
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
-
-    <!-- Task 7: Hostname -->
-    <hostname>MyAutoRouter</hostname>
-
-    <!-- Task 12: Banner MOTD -->
     <banner>
       <motd>
         <banner>Welkom! Dit toestel is geconfigureerd via NETCONF automatisering.</banner>
       </motd>
     </banner>
-
-    <!-- Task 8: DNS Server -->
+    <hostname>MyAutoRouter</hostname>
+    <username>
+      <name>autouser</name>
+      <privilege>15</privilege>
+      <password>
+        <encryption>0</encryption>
+        <password>AutoPass123</password>
+      </password>
+    </username>
     <ip>
       <name-server>
         <no-vrf>8.8.8.8</no-vrf>
       </name-server>
-
-      <!-- Task 10: Statische route -->
       <route>
         <ip-route-interface-forwarding-list>
           <prefix>172.20.0.0</prefix>
@@ -27,8 +27,6 @@
           </fwd-list>
         </ip-route-interface-forwarding-list>
       </route>
-
-      <!-- Task 30: ACL -->
       <access-list>
         <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl">
           <name>AUTOMATION_ACL</name>
@@ -54,46 +52,14 @@
         </extended>
       </access-list>
     </ip>
-
-    <!-- Task 13: Lokale gebruiker -->
-    <username>
-      <name>autouser</name>
-      <privilege>15</privilege>
-      <password>
-        <encryption>0</encryption>
-        <password>AutoPass123</password>
-      </password>
-    </username>
-
-    <!-- Task 17: SNMP -->
-    <snmp-server>
-      <community xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-snmp">
-        <name>AutoCommunity</name>
-      </community>
-    </snmp-server>
-
-    <!-- Task 9: NTP -->
-    <ntp>
-      <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
-        <server-list>
-          <ip-address>216.239.35.0</ip-address>
-        </server-list>
-      </server>
-    </ntp>
-
-    <!-- Tasks 1, 2, 3, 5, 6: Interfaces -->
     <interface>
-
-      <!-- Task 1: Description op GigabitEthernet1 -->
       <GigabitEthernet>
         <name>1</name>
         <description>Geconfigureerd via NETCONF Automatisering</description>
       </GigabitEthernet>
-
-      <!-- Tasks 5, 6: Loopback100 met IPv4 -->
       <Loopback>
         <name>100</name>
-        <description>Auto-Loopback1 - Task Custom</description>
+        <description>Auto-Loopback1</description>
         <ip>
           <address>
             <primary>
@@ -103,11 +69,9 @@
           </address>
         </ip>
       </Loopback>
-
-      <!-- Loopback101 met IPv4 -->
       <Loopback>
         <name>101</name>
-        <description>Auto-Loopback2 - Task Custom</description>
+        <description>Auto-Loopback2</description>
         <ip>
           <address>
             <primary>
@@ -117,11 +81,9 @@
           </address>
         </ip>
       </Loopback>
-
-      <!-- Task 26: Loopback102 met IPv6 -->
       <Loopback>
         <name>102</name>
-        <description>Auto-Loopback3-IPv6 - Task Custom</description>
+        <description>Auto-Loopback3-IPv6</description>
         <ipv6>
           <address>
             <prefix-list>
@@ -130,10 +92,7 @@
           </address>
         </ipv6>
       </Loopback>
-
     </interface>
-
-    <!-- Task 27: OSPF routing -->
     <router>
       <ospf xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ospf">
         <id>1</id>
@@ -149,6 +108,17 @@
         </network>
       </ospf>
     </router>
-
+    <snmp-server>
+      <community xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-snmp">
+        <name>AutoCommunity</name>
+      </community>
+    </snmp-server>
+    <ntp>
+      <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
+        <server-list>
+          <ip-address>216.239.35.0</ip-address>
+        </server-list>
+      </server>
+    </ntp>
   </native>
 </config>
